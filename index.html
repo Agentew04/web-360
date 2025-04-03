@@ -8,6 +8,24 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
+	<script>
+		function requestSensorPermissions() {
+			if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+				DeviceOrientationEvent.requestPermission()
+					.then(permissionState => {
+						if (permissionState === 'granted') {
+							console.log("Permissão concedida!");
+						} else {
+							console.log("Permissão negada pelo usuário.");
+						}
+					})
+					.catch(console.error);
+			} else {
+				console.log("Este navegador não requer permissão para sensores.");
+			}
+		}
+	</script>
+<button onclick="requestSensorPermissions()">Ativar Sensores</button>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
